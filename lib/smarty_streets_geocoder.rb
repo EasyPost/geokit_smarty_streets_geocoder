@@ -1,6 +1,6 @@
 require "uri"
 require "geokit"
-require "Indirizzo"
+require "indirizzo"
 require "countries"
 
 module Geokit
