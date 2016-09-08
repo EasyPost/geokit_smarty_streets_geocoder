@@ -1,3 +1,6 @@
+[![Gem Version](https://badge.fury.io/rb/smarty_streets_geocoder.svg)](https://badge.fury.io/rb/smarty_streets_geocoder)
+[![Build Status](https://travis-ci.org/srozum/smarty_streets_geocoder.svg?branch=master)](https://travis-ci.org/srozum/smarty_streets_geocoder)
+
 # SmartyStreetsGeocoder
 
 Custom [geokit](https://github.com/geokit/geokit) geocoder for [SmartyStreets](https://smartystreets.com) address verification service.
@@ -24,8 +27,8 @@ Or install it yourself as:
 
 
 ```ruby
-    # This is your Here application key for the Here Geocoder.
-    # See https://developer.here.com/develop/rest-apis
+    # This is your SmartyStreets application key for the SmartyStreets Geocoder.
+    # See https://smartystreets.com/docs/authentication#keypairs
     Geokit::Geocoders::SmartyStreetsGeocoder.auth_id = 'REPLACE_WITH_YOUR_KEY'
     Geokit::Geocoders::SmartyStreetsGeocoder.auth_token = 'REPLACE_WITH_YOUR_CODE'
 ```
