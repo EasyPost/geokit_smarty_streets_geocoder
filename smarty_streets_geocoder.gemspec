@@ -24,5 +24,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "webmock"
 
   spec.add_dependency "geokit"
+  spec.add_dependency "Indirizzo"
+  spec.add_dependency "countries"
 
 end

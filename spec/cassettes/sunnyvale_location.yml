@@ -1,0 +1,39 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://us-zipcode.api.smartystreets.com/lookup?auth-id=<SMARTYSTREETS_AUTH_ID>&auth-token=<SMARTYSTREETS_AUTH_TOKEN>&city=Sunnyvale&state=CA&zipcode
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Thu, 08 Sep 2016 23:30:44 GMT
+      Content-Length:
+      - '1262'
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '[{"input_index":0,"city_states":[{"city":"Sunnyvale","state_abbreviation":"CA","state":"California","mailable_city":true}],"zipcodes":[{"zipcode":"94085","zipcode_type":"S","default_city":"Sunnyvale","county_fips":"06085","county_name":"Santa
+        Clara","state_abbreviation":"CA","state":"California","latitude":37.38943,"longitude":-122.01811,"precision":"Zip5"},{"zipcode":"94086","zipcode_type":"S","default_city":"Sunnyvale","county_fips":"06085","county_name":"Santa
+        Clara","state_abbreviation":"CA","state":"California","latitude":37.37142,"longitude":-122.02794,"precision":"Zip5"},{"zipcode":"94087","zipcode_type":"S","default_city":"Sunnyvale","county_fips":"06085","county_name":"Santa
+        Clara","state_abbreviation":"CA","state":"California","latitude":37.35121,"longitude":-122.03564,"precision":"Zip5"},{"zipcode":"94088","zipcode_type":"P","default_city":"Sunnyvale","county_fips":"06085","county_name":"Santa
+        Clara","state_abbreviation":"CA","state":"California","latitude":37.41039,"longitude":-122.01898,"precision":"Zip5"},{"zipcode":"94089","zipcode_type":"S","default_city":"Sunnyvale","county_fips":"06085","county_name":"Santa
+        Clara","state_abbreviation":"CA","state":"California","latitude":37.40243,"longitude":-122.00355,"precision":"Zip5"}]}]'
+    http_version: 
+  recorded_at: Thu, 08 Sep 2016 23:30:44 GMT
+recorded_with: VCR 3.0.3

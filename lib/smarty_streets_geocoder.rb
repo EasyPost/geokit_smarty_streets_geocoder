@@ -1,16 +1,18 @@
+require "uri"
 require "geokit"
+require "Indirizzo"
+require "countries"
 
 module Geokit
   module Geocoders
     class SmartyStreetsGeocoder < Geocoder
 
-      API_ENDPOINT = "https://us-zipcode.api.smartystreets.com/lookup"
+      API_ENDPOINT = "https://us-zipcode.api.smartystreets.com/lookup".freeze
 
       config :auth_id, :auth_token
 
       private
 
-      # Template method which does the geocode lookup.
       def self.do_geocode(address, options = {})
 
         if (auth_id.nil? || auth_id.empty?) || (auth_token.nil? || auth_token.empty?)
@@ -19,21 +21,21 @@ module Geokit
 
         address = address.is_a?(GeoLoc) ? address : parse_address(address)
 
-        return address unless address.is_us?
+        return GeoLoc.new unless address.is_us?
 
         process :json, submit_url(address), address
       end
 
       def self.submit_url(address)
         args = []
-        args << "auth-id=#{Geokit::Inflector.url_escape(auth_id)}"
-        args << "auth-token=#{Geokit::Inflector.url_escape(auth_token)}"
+        args << ["auth-id", auth_id]
+        args << ["auth-token", auth_token]
 
-        args << "city=#{Geokit::Inflector.url_escape(address.city)}"   unless address.city.nil? || address.city.empty?
-        args << "state=#{Geokit::Inflector.url_escape(address.state)}" unless address.state.nil? || address.state.empty?
-        args << "zipcode=#{Geokit::Inflector.url_escape(address.zip)}" unless address.zip.nil? || address.zip.empty?
+        args << ["city", address.city]
+        args << ["state", address.state]
+        args << ["zipcode", address.zip]
 
-        [API_ENDPOINT, '?', args.join('&')].join('')
+        [API_ENDPOINT, '?', URI.encode_www_form(args)].join('')
       end
 
 
@@ -42,42 +44,45 @@ module Geokit
 
         return GeoLoc.new if json.has_key?('status') # means error
 
-        new_loc.tap do |loc|
-          loc.street_address = address.street_address
-          loc.province       = address.province
-          loc.country_code   = address.country_code
+        address.provider = Geokit::Inflector.underscore(provider_name)
 
-          city_state = json["city_states"].first
-
-          loc.city           = city_state["city"]
-          loc.state_code     = city_state["state_abbreviation"]
-          loc.state_name     = city_state["state"]
-
-          zipcode = detect_zipcode(json, loc.city)
-
-          loc.zip = zipcode["zipcode"]
-          loc.lat = zipcode["latitude"]
-          loc.lng = zipcode["longitude"]
-
-          loc.success = true
+        if city_state = json["city_states"].first
+          address.city           = city_state["city"]
+          address.state_code     = city_state["state_abbreviation"]
+          address.state_name     = city_state["state"]
         end
+
+        if zipcode = detect_zipcode(json, address.city)
+          address.zip = zipcode["zipcode"]
+          address.lat = zipcode["latitude"]
+          address.lng = zipcode["longitude"]
+        end
+
+        address.success = true
+
+        address
       end
 
       def self.detect_zipcode(json, city)
         json["zipcodes"].detect { |zc| zc["default_city"] == city } || json["zipcodes"].first
       end
 
-      # Expects address line in format: street_address, province, city, state, zip, country
       def self.parse_address(address_string)
-        address_parts = address_string.split(',').map(&:strip)
-        GeoLoc.new(
-          street_address: address_parts[0],
-          province: address_parts[1],
-          city: address_parts[2],
-          state: address_parts[3],
-          zip: address_parts[4],
-          country_code: address_parts[5]
-        )
+        address = Indirizzo::Address.new(address_string, expand_streets: false)
+
+        loc = GeoLoc.new
+        loc.street_number = address.street.join(' ')
+        loc.street_name = address.number
+        loc.city = address.city
+        loc.state = address.state
+        loc.zip = address.zip
+
+        if country = ::ISO3166::Country.find_country_by_alpha2(address.country) || ::ISO3166::Country.find_country_by_name(address.country)
+          loc.country_code = country.try(:alpha2)
+          loc.country = country.try(:name) || address.country
+        end
+
+        loc
       end
 
     end

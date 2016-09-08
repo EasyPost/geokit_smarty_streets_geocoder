@@ -36,9 +36,11 @@ Or install it yourself as:
 
 ## Usage
 
+Because US Zipcode API requires zip and/or city and state it's better to pass an instance of GeoLoc rather than address string.
+
 ```ruby
     # use :smarty_streets to specify this geocoder in your list of geocoders.
-    Geokit::Geocoders::SmartyStreetsGeocoder.geocode("Sunnyvale, CA")
+    Geokit::Geocoders::SmartyStreetsGeocoder.geocode( Geokit::GeoLoc.new(city: "Sunnyvale", state: "CA", country_code: "US") )
 ```
 
 ## Contributing
