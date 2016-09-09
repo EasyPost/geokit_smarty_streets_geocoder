@@ -1,7 +1,7 @@
 ENV['RAKE_ENV'] = 'test'
 
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
-require 'smarty_streets_geocoder'
+require 'geokit_smarty_streets_geocoder'
 
 require "vcr"
 

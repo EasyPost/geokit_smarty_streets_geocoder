@@ -1,5 +1,5 @@
-[![Gem Version](https://badge.fury.io/rb/smarty_streets_geocoder.svg)](https://badge.fury.io/rb/smarty_streets_geocoder)
-[![Build Status](https://travis-ci.org/srozum/smarty_streets_geocoder.svg?branch=master)](https://travis-ci.org/srozum/smarty_streets_geocoder)
+[![Gem Version](https://badge.fury.io/rb/geokit_smarty_streets_geocoder.svg)](https://badge.fury.io/rb/geokit_smarty_streets_geocoder)
+[![CircleCI](https://circleci.com/gh/EasyPost/geokit_smarty_streets_geocoder.svg?style=svg)](https://circleci.com/gh/EasyPost/geokit_smarty_streets_geocoder)
 
 # SmartyStreetsGeocoder
 
@@ -13,7 +13,7 @@ This geocoder works for US addressed only.
 
 Add this line to your application's Gemfile:
 
-    gem 'smarty_streets_geocoder'
+    gem 'geokit_smarty_streets_geocoder'
 
 And then execute:
 
@@ -21,7 +21,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install smarty_streets_geocoder
+    $ gem install geokit_smarty_streets_geocoder
 
 ## Configuration
 
@@ -45,7 +45,7 @@ Because US Zipcode API requires zip and/or city and state it's better to pass an
 
 ## Contributing
 
-1. Fork it ( https://github.com/[my-github-username]/smarty_streets_geocoder/fork )
+1. Fork it ( https://github.com/[my-github-username]/geokit_smarty_streets_geocoder/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
