@@ -1,0 +1,34 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://us-zipcode.api.smartystreets.com/lookup?auth-id=<SMARTYSTREETS_AUTH_ID>&auth-token=<SMARTYSTREETS_AUTH_TOKEN>&city=%5B%22Gilbert%22%5D&state=AZ&zipcode=85297
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Fri, 09 Sep 2016 18:17:29 GMT
+      Content-Length:
+      - '349'
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '[{"input_index":0,"city_states":[{"city":"Gilbert","state_abbreviation":"AZ","state":"Arizona","mailable_city":true}],"zipcodes":[{"zipcode":"85297","zipcode_type":"S","default_city":"Gilbert","county_fips":"04013","county_name":"Maricopa","state_abbreviation":"AZ","state":"Arizona","latitude":33.27696,"longitude":-111.71752,"precision":"Zip5"}]}]'
+    http_version: 
+  recorded_at: Fri, 09 Sep 2016 18:17:29 GMT
+recorded_with: VCR 3.0.3
