@@ -1,5 +1,5 @@
 [![Gem Version](https://badge.fury.io/rb/geokit_smarty_streets_geocoder.svg)](https://badge.fury.io/rb/geokit_smarty_streets_geocoder)
-[![CircleCI](https://circleci.com/gh/EasyPost/geokit_smarty_streets_geocoder.svg?style=svg)](https://circleci.com/gh/EasyPost/geokit_smarty_streets_geocoder)
+[![Build Status](https://travis-ci.org/EasyPost/geokit_smarty_streets_geocoder.svg?branch=master)](https://travis-ci.org/EasyPost/geokit_smarty_streets_geocoder)
 
 # SmartyStreetsGeocoder
 
